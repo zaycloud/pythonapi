@@ -1,8 +1,15 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS # Import CORS
 import os
 
 app = Flask(__name__)
+# Allow all origins for /todos and /todos/* for now.
+# For production, you might want to restrict this to your frontend's domain.
+CORS(app, resources={
+    r"/todos/*": {"origins": ["http://zaynpythonapi.mooo.com", "http://localhost:5173", "http://app.zaynpythonapi.mooo.com"]},
+    r"/todos": {"origins": ["http://zaynpythonapi.mooo.com", "http://localhost:5173", "http://app.zaynpythonapi.mooo.com"]}
+})
 
 # Database Configuration - Replace with your actual connection string
 # For local development, you might use something like:
